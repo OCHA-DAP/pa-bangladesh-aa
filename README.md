@@ -1,6 +1,7 @@
 # CERF Anticipatory Action framework in Bangladesh
 
 Building on the work by individual agencies, such as the IFRC, WFP, FAO and NGOs, the pilot will methodologically combine three components, scaling-up anticipatory humanitarian action in Bangladesh:
+
 i) A robust forecasting embedded in a clear decision-making process (the model).
 The pilot will use a government run and endorsed early warning system, combining a 10-day probabilistic flood forecast for operational readiness and a 5-day deterministic flood forecast for activation of anticipatory action. This trigger has been successfully used by IFRC and WFP in the past.
   

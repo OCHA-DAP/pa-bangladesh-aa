@@ -8,7 +8,8 @@ from datetime import date, timedelta
 
 DIR_PATH = os.path.dirname(os.path.realpath(__file__))
 
-Water_threshold=19.5+.85
+Water_threshold=19.5+0.85
+ndays_threshold_ffwc=3
 # Water_threshold=19.5
 # from https://docs.google.com/spreadsheets/d/1J5B9pktZYnlBwAtb8n907A8P6xFVlCCd/edit#gid=1706380269 
 FFWC_RL_LOG_FILENAME='Forecast Log Sheet - 2020.xlsx - FFWC.csv'
@@ -18,8 +19,10 @@ FFWC_RL_FOLDER='FFWC_DATA'
 
 # from https://cds.climate.copernicus.eu/cdsapp#!/dataset/cems-glofas-historical?tab=overview 
 Discharge_threshold=100000
+ndays_threshold_glofas=2
 GLOFAS_DS_FILENAME='{}.csv'
 GLOFAS_DS_FOLDER='GLOFAS_data'
+
 
 def get_glofas_df():
     glofas_df=pd.DataFrame(columns=['dis24'])
@@ -47,7 +50,7 @@ def get_ffwc_his_df():
     ffwc_df.dropna(inplace=True)
     return ffwc_df
 
-def calculate_activations(days_above):
+def calculate_activations(days_above,ndays_threshold):
     activations=pd.DataFrame(columns=['start_date','end_date'])
     start_group=True
     for i,day in enumerate(days_above):
@@ -64,7 +67,7 @@ def calculate_activations(days_above):
         activations=activations.append({'start_date':start_date,'end_date':day},ignore_index=True)
         start_group=True
     activations['ndays'] = (activations['end_date'] - activations['start_date']).dt.days +1
-    activations = activations[activations['ndays']>=3]
+    activations = activations[activations['ndays']>=ndays_threshold]
     return activations
 
 glofas_df=get_glofas_df()
@@ -93,7 +96,7 @@ ax1_t.legend(loc='best')
 
 # calculate activations 
 # GLOFAS
-GLOFAS_activations=calculate_activations(glofas_df[glofas_df['dis24']>=Discharge_threshold].index)
+GLOFAS_activations=calculate_activations(glofas_df[glofas_df['dis24']>=Discharge_threshold].index,ndays_threshold_glofas)
 for iactivation,( _,activation) in enumerate(GLOFAS_activations.iterrows()):
     #print(activation)
     mean_days=(activation['start_date'])
@@ -105,7 +108,7 @@ for iactivation,( _,activation) in enumerate(GLOFAS_activations.iterrows()):
     ax1.axvspan(activation['start_date']-timedelta(days=0.5),
                 activation['end_date']+timedelta(days=0.5),facecolor='green', alpha=0.5)    
 # FFWC
-FFWC_activations=calculate_activations(ffwc_his_df[ffwc_his_df['WL']>=Water_threshold].index)
+FFWC_activations=calculate_activations(ffwc_his_df[ffwc_his_df['WL']>=Water_threshold].index,ndays_threshold_ffwc)
 for iactivation,( _,activation) in enumerate(FFWC_activations.iterrows()):
     mean_days=(activation['start_date'])
     ax1_t.annotate("",

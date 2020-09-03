@@ -127,3 +127,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+Sentinel-1-Data/*
+bgd_admbnda_adm4_bbs_20180410/*

@@ -48,7 +48,7 @@ def calc_extent(dirname):
         output_df = output_df.append(output_df_part)
 
     output_df.loc[:, 'flood_fraction'] = output_df['flooded_area'] / output_df['union_area']
-    output_df.to_excel('Sentinel-1-BGD-Flooding-updated-2.xlsx')
+    output_df.to_excel('Sentinel-1-BGD-Flooding-updated.xlsx')
     return(output_df)
 
 

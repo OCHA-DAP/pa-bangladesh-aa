@@ -132,3 +132,7 @@ Sentinel-1-Data/*
 bgd_admbnda_adm4_bbs_20180410/*
 Sentinel_validation/bdg_shp/*
 Sentinel_validation/Shapefiles/*
+
+.idea/
+
+Sentinel_validation/Sentinel-1-BGD-Flooding-updated.xlsx

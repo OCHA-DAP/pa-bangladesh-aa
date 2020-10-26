@@ -128,11 +128,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-Sentinel-1-Data/*
-bgd_admbnda_adm4_bbs_20180410/*
-Sentinel_validation/Shapefiles/bdg_shp/*
-Sentinel_validation/Shapefiles/*
+data/processed/*
+
 
 .idea/
-
-Sentinel_validation/Sentinel-1-BGD-Flooding-updated.xlsx

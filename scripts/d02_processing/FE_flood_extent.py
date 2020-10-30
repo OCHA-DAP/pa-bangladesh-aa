@@ -51,4 +51,4 @@ def calc_extent(admin):
 #for area in admin_areas:
 #    calc_extent(area)
 
-calc_extent('ADM4_PCODE')
+# calc_extent('ADM4_PCODE')

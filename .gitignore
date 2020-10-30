@@ -128,7 +128,11 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# Processed data
 data/processed/*
+
+# Scratch notebooks
+notebooks/scratch/*
 
 
 .idea/

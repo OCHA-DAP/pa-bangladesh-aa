@@ -92,8 +92,7 @@ def extract_dis24_values(date,folder,glofas_df):
 
 def get_glofas_df(year,folder):
     start_date = date(year, 1, 1)
-    end_date = date(year, 1, 2)
-    # end_date = date(year, 12, 31)
+    end_date = date(year, 12, 31)
     delta = timedelta(days=1)
     glofas_df=pd.DataFrame()
     while start_date <= end_date:

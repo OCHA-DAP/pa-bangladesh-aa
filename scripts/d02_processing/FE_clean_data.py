@@ -12,7 +12,7 @@ def group_df(df, group):
 
     copy = df
     copy['date'] = pd.to_datetime(copy['date'], format="%Y-%m-%d").dt.strftime('%Y-%m-%d')
-    copy = copy.groupby(['date', group]).mean().reset_index()
+    # copy = copy.groupby(['date', group]).mean().reset_index()
     output = copy[[group, 'flood_fraction', 'date']]
     return output
 

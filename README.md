@@ -23,7 +23,7 @@ In addition, the pilot seeks to amplify and coordinate similar anticipatory acti
 The analysis within this repository contains two components. 
 
 1. Processing FFWC and GLOFAS forecasting data, used to trigger this pilot's anticipatory action. 
-2. Calculating historical estimates of flooding extent over time in five high priority districts (Bogra, Gaibandha, Jamalpur, Kurigram, Sirajganj). This work is largely based on an analysis of Sentinel-1 SAR imagery in Google Earth Engine, accessible [here](https://code.earthengine.google.com/0fe2c1f3b2cf8ef6fe9aa81382b00191). 
+2. Calculating historical estimates of flooding extent over time in five high priority districts (Bogra, Gaibandha, Jamalpur, Kurigram, Sirajganj). This work is largely based on an analysis of Sentinel-1 SAR imagery in Google Earth Engine, accessible [here](https://code.earthengine.google.com/0fe2c1f3b2cf8ef6fe9aa81382b00191). This imagery processing methodology is adapted from [guidance from the UN-SPIDER Knowledge Portal](https://un-spider.org/advisory-support/recommended-practices/recommended-practice-google-earth-engine-flood-mapping/step-by-step).
 
 ## Structure of this repository 
 
@@ -51,7 +51,7 @@ The content within this repository is structured as follows:
 
 ```
 
-Note that larger raw and processed data files are currently not included within this repository. 
+Note that larger raw and processed data files are currently not included within this repository. As described below, the entire analysis can be reproduced using shapefiles generated from a Google Earth Engine script. Note that this requires a Google Earth Engine account. 
 
 ## Getting started 
 
@@ -61,3 +61,15 @@ Set up and activate a Python environment in Anaconda using the ```environment.ym
 conda env create -f environment.yml
 conda activate bang_floods
 ```
+
+### To reproduce the historical analysis of flood evolution:
+
+Generate shapefiles that delineate flood extent over time using [this Google Earth Engine Script](https://code.earthengine.google.com/0fe2c1f3b2cf8ef6fe9aa81382b00191). Within the script, the following parameters can be changed: 1) start and end dates of a pre-flood period, 2) start and end dates of a flood period, and 3) shapefile to delineate geographic area of interest. 
+
+Run a Python script from the terminal in the repository root directory to generate .CSV files that include the flood fraction over time within admin areas. This script can be run by aggregating to ```ADM4```, ```ADM3```, and ```ADM2``` levels. For example: 
+
+```
+python scripts\d02_processing\FE_flood_extent.py ADM4 
+```
+
+

@@ -2,7 +2,6 @@ import cdsapi
 import zipfile
 import os
 from pathlib import Path
-import json
 import pandas as pd
 from netCDF4 import Dataset
 import numpy as np

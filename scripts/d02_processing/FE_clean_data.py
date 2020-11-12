@@ -1,19 +1,20 @@
 import pandas as pd
 
 
-def group_df(df, group):
+def clean_df(df, group):
     """
 
-    Group flood extent estimates by admin area - takes the mean of the ADM4 calculations
+    Gets rid of redundant columns, converts to date time format
     df: dataframe output from FE_flood_extent.py
-    group: ADM4_EN, ADM3_EN, ADM2_EN, ADM1_EN
+    group: ADM4, ADM3, ADM2, ADM1
 
     """
-
+    name = group + '_EN'
+    pcode = group + '_PCODE'
     copy = df
     copy['date'] = pd.to_datetime(copy['date'], format="%Y-%m-%d").dt.strftime('%Y-%m-%d')
     # copy = copy.groupby(['date', group]).mean().reset_index()
-    output = copy[[group, 'flood_fraction', 'date']]
+    output = copy[[name, pcode, 'flood_fraction', 'date']]
     return output
 
 
@@ -26,5 +27,5 @@ def select_df(df, select):
 
     """
     copy = df
-    adm_col = copy.columns[0]  # Assuming that the column with the Admin area names is first in the dataframe
+    adm_col = copy.columns[1]  # Match on pcode column
     return df.loc[df[adm_col] == select].reset_index()

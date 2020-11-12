@@ -131,6 +131,9 @@ dmypy.json
 # Processed data
 data/processed/*
 
+# Local plots and figures
+results/local
+
 # Scratch notebooks
 notebooks/scratch/*
 

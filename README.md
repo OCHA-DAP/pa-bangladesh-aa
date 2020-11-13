@@ -31,27 +31,26 @@ The content within this repository is structured as follows:
 
 ```
 ├── data
-│   ├── processed          <- Data that has been processed or transformed in some way.  
-│   └── raw                <- Original, immutable data. 
+│   ├── processed             <- Data that has been processed or transformed in some way.  
+│   └── raw                   <- Original, immutable data. 
 │
-├── notebooks              <- Jupyter notebooks that contain a walkthrough of data analysis steps. 
+├── notebooks                 <- Jupyter notebooks that contain a walkthrough of data analysis steps. 
 │
-├── results                <- Final results. 
-│   └── plots              <- Output figures. 
+├── scripts                   <- Scripts to perform data processing and analysis.    
+│   ├── d01_data              <- Scripts to load in datasets. 
+│   ├── d02_processing        <- Scripts to perform basic cleaning and preprocessing on data.
+│   ├── d03_analysis          <- Scripts to conduct more in-depth analysis of data
+│   └── d04_visualization     <- Scripts to create visualizations. 
 │
-├── scripts                <- Scripts to perform data processing and analysis. 
-│   │
-│   ├── d01_data           <- Scripts to load in datasets. 
-│   ├── d02_processing     <- Scripts to perform basic cleaning and preprocessing on data.
-│   ├── d03_analysis       <- Scripts to conduct more in-depth analysis of data
-│   └── d04_visualization  <- Scripts to create visualizations. 
-│
-├── README.md              <- Description of this project.
-└── environment.yml        <- Contains dependencies to set up a conda environment. 
+├── Generate_flood_frac.py    <- Top level script to generate data.
+├── Generate_interpolated.py  <- Description of this project.
+├── README.md                 <- Description of this project.
+├── config.yml                <- Global variables.
+└── environment.yml           <- Contains dependencies to set up a conda environment. 
 
 ```
 
-Note that larger raw and processed data files are currently not included within this repository. As described below, the entire analysis can be reproduced using shapefiles generated from a Google Earth Engine script. Note that this requires a Google Earth Engine account. 
+Larger raw and processed data files are currently not included within this repository. As described below, the historical analysis of flood extent can be reproduced using shapefiles generated from a Google Earth Engine script. Note that this requires a Google Earth Engine account. 
 
 ## Getting started 
 
@@ -64,12 +63,21 @@ conda activate bang_floods
 
 ### To reproduce the historical analysis of flood evolution:
 
-Generate shapefiles that delineate flood extent over time using [this Google Earth Engine Script](https://code.earthengine.google.com/0fe2c1f3b2cf8ef6fe9aa81382b00191). Within the script, the following parameters can be changed: 1) start and end dates of a pre-flood period, 2) start and end dates of a flood period, and 3) shapefile to delineate geographic area of interest. 
+1. Generate shapefiles that delineate flood extent over time using [this Google Earth Engine Script](https://code.earthengine.google.com/0fe2c1f3b2cf8ef6fe9aa81382b00191). Within the script, the following parameters can be changed: 1) start and end dates of a pre-flood period, 2) start and end dates of a flood period, and 3) shapefile to delineate geographic area of interest.
 
-Run a Python script from the terminal in the repository root directory to generate .CSV files that include the flood fraction over time within admin areas. This script can be run by aggregating to ```ADM4```, ```ADM3```, and ```ADM2``` levels. For example: 
+2. Edit the ```config.yml``` file to include the location of the directory where your output shapefiles are stored (```shp_dir```) and the location where you want your output data to go (```data_dir```).
+
+3. Run a Python script from the terminal in the repository root directory to generate .CSV files that include the flood fraction over time within admin areas. This script can be run by aggregating to ```ADM4```, ```ADM3```, and ```ADM2``` levels. For example: 
 
 ```
-python scripts\d02_processing\FE_flood_extent.py ADM4 
+python Generate_flood_frac.py ADM4 
+
 ```
 
+4. Run another Python script to generate the interpolated estimates of flood extent over time. These estimates are created by fitting polynomial and Gaussian functions to the original estimates derived from Sentinel-1 SAR imagery (calculated in the above Google Earth Engine script). This script requires the output from the previous script as input. 
+
+```
+python Generate_interpolated.py ADM4
+
+```
 

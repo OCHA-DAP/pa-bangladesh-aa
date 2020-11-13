@@ -71,13 +71,11 @@ conda activate bang_floods
 
 ```
 python Generate_flood_frac.py ADM4 
-
 ```
 
 4. Run another Python script to generate the interpolated estimates of flood extent over time. These estimates are created by fitting polynomial and Gaussian functions to the original estimates derived from Sentinel-1 SAR imagery (calculated in the above Google Earth Engine script). This script requires the output from the previous script as input. 
 
 ```
 python Generate_interpolated.py ADM4
-
 ```
 

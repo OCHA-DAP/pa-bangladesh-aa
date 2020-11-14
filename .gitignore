@@ -128,5 +128,14 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-Sentinel-1-Data/*
-bgd_admbnda_adm4_bbs_20180410/*
+# Processed data
+data/processed/*
+
+# Local plots and figures
+results/local
+
+# Scratch notebooks
+notebooks/scratch/*
+
+
+.idea/

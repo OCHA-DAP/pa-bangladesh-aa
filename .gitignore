@@ -137,5 +137,8 @@ results/local
 # Scratch notebooks
 notebooks/scratch/*
 
+# Scratch notebooks
+notebooks/mauza_data/*
+
 
 .idea/
